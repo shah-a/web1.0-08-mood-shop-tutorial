@@ -1,15 +1,24 @@
+/* colour palette: https://colorhunt.co/palette/189745
+1) #eeeeee
+2) #32e0c4
+3) #393e46
+4) #222831 */
+
 body {
   font-family: Helvetica;
   font-size: 16px;
   line-height: 1.5;
   margin: 0;
+  background-color: #eeeeee;
+  color: #393e46;
 }
 
 header {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: bisque;
+  background-color: #32e0c4;
 }
 
 header ul {
