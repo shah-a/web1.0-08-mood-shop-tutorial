@@ -63,3 +63,49 @@ data.forEach(function (mood) {
 
 //   itemsContainer.appendChild(newDiv)
 // }
+
+const cart = [];
+
+function addItem(name, price) {
+  for (let i = 0; i < cart.length; i++) {
+    if (name === cart[i].name) {
+      cart[i].qty++;
+      return;
+    }
+  }
+    const item = {name: name, price: price, qty: 1};
+    cart.push(item);
+}
+
+function showItems() {
+  console.log(`You have ${getQty()} items in your cart`);
+  cart.forEach(function (item) {
+    console.log(`- ${item.name} $${item.price} x ${item.qty}`);
+  })
+  console.log(`Total in cart: $${getTotal().toFixed(2)}`)
+}
+
+function getQty() {
+  let qty = 0;
+  for (let i = 0; i < cart.length; i++) {
+    qty += cart[i].qty;
+  }
+  return qty;
+}
+
+function getTotal() {
+  let total = 0;
+  for (let i = 0; i < cart.length; i++) {
+    total += cart[i].price * cart[i].qty;
+  }
+  return total;
+}
+
+addItem("Apple", 0.99);
+addItem("Orange", 1.29);
+addItem("Opinion", 0.02);
+addItem("Apple", 0.99);
+addItem("Frisbee", 9.92);
+addItem("Apple", 0.99);
+addItem("Orange", 1.29);
+showItems();
