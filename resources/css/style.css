@@ -2,10 +2,13 @@
 1) #eeeeee
 2) #32e0c4
 3) #393e46
-4) #222831 */
+4) #222831*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+
 
 body {
-  font-family: Helvetica;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   line-height: 1.5;
   margin: 0;
@@ -14,7 +17,8 @@ body {
 }
 
 .page-header {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -44,7 +48,33 @@ body {
 }
 
 .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   border: solid 1px;
   width: 300px;
   margin-top: 30px;
+}
+
+.item p {
+  text-align: center;
+  margin: 0.5em;
+}
+
+.item button {
+  margin: 1em;
+  border: 0.1em solid #32e0c4;
+  border-radius: 0.2em;
+  padding: 0.35em 1.2em;
+  font-family: 'Roboto', sans-serif;
+  color: #eeeeee;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.item button:hover {
+  color: #222831;
+  background-color: #eeeeee;
 }
