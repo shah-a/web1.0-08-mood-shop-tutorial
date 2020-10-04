@@ -12,9 +12,8 @@ data.forEach(function (mood) {
   let img = document.createElement("img");
   img.src = mood.image;
   img.width = 400;
-  //img.height = 300;
+  img.height = 300;
   newDiv.appendChild(img);
-  itemsContainer.appendChild(newDiv);
 
   // Make element for description
   let desc = document.createElement("p");
@@ -25,9 +24,18 @@ data.forEach(function (mood) {
   let price = document.createElement("p");
   price.innerText = mood.price;
   newDiv.appendChild(price);
+
+  // Make 'Add to Cart' button
+  let button = document.createElement("button");
+  button.id = mood.name;
+  button.innerHTML = "Add to Cart";
+  button.dataset.price = mood.price;
+  newDiv.appendChild(button)
+
+  itemsContainer.appendChild(newDiv);
 });
 
-// // For loop method:
+// // For loop method (**DOES NOT INCLUDE STEPS AFTER IMAGE, DESC, AND PRICE**):
 // // The length of our data determines how many times this loop cycles
 // for (let i = 0; i < data.length; ++i) {
 //   // Make a new div element and give it a class name
@@ -39,12 +47,11 @@ data.forEach(function (mood) {
 //   // This will change each time we go through the loop
 //   img.src = data[i].image;
 //   img.width = 300;
-//   //img.height = 300;
+//   img.height = 300;
 
 //   // Add the image to the div
 //   newDiv.appendChild(img);
 //   // Put new div inside items container
-//   itemsContainer.appendChild(newDiv)
 
 //   let desc = document.createElement("p");
 //   desc.innerText = data[i].desc;
@@ -53,4 +60,6 @@ data.forEach(function (mood) {
 //   let price = document.createElement("p");
 //   price.innerText = data[i].price;
 //   newDiv.appendChild(price);
+
+//   itemsContainer.appendChild(newDiv)
 // }
