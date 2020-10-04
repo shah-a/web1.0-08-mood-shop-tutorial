@@ -13,7 +13,7 @@ body {
   color: #393e46;
 }
 
-header {
+.page-header {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: row;
@@ -21,14 +21,14 @@ header {
   background-color: #32e0c4;
 }
 
-header ul {
+.page-header ul {
   display: flex;
   flex-direction: row;
   justify-content: center-between;
   list-style: none;
 }
 
-header a {
+.page-header a {
   display: block;
   padding: 0.5em;
   text-decoration: none;
