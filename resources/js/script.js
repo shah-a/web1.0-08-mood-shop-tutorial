@@ -11,7 +11,7 @@ data.forEach(function (mood) {
   // Make an image element
   let img = document.createElement("img");
   img.src = mood.image;
-  img.width = 400;
+  img.width = 300;
   img.height = 300;
   newDiv.appendChild(img);
 
