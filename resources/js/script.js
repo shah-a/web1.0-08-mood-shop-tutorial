@@ -73,16 +73,19 @@ function addItem(name, price) {
       return;
     }
   }
-    const item = {name: name, price: price, qty: 1};
+    const item = {name, price, qty: 1};
     cart.push(item);
 }
 
 function showItems() {
-  console.log(`You have ${getQty()} items in your cart`);
+  const qty = getQty();
+  const total = getTotal();
+
+  console.log(`You have ${qty} items in your cart`);
   cart.forEach(function (item) {
     console.log(`- ${item.name} $${item.price} x ${item.qty}`);
   })
-  console.log(`Total in cart: $${getTotal().toFixed(2)}`)
+  console.log(`Total in cart: $${total}`)
 }
 
 function getQty() {
@@ -98,7 +101,7 @@ function getTotal() {
   for (let i = 0; i < cart.length; i++) {
     total += cart[i].price * cart[i].qty;
   }
-  return total;
+  return total.toFixed(2);
 }
 
 addItem("Apple", 0.99);
