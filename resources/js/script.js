@@ -67,6 +67,13 @@ data.forEach(function (mood) {
 //   itemsContainer.appendChild(newDiv)
 // }
 
+const all_items_button = Array.from(document.querySelectorAll("button"));
+
+all_items_button.forEach(elt => elt.addEventListener('click', () => {
+  addItem(elt.getAttribute("id"), elt.getAttribute("data-price"));
+  showItems()
+}))
+
 const cart = [];
 
 // ----------------------------------------
@@ -91,7 +98,7 @@ function showItems() {
   let itemStr = "";
   cart.forEach(function (item) {
     const {name, price, qty} = item;
-    itemStr += `<li>${name} $${price} x ${qty} = ${price * qty}</li>`;
+    itemStr += `<li>${name} $${price} x ${qty} = ${price * qty}</li>`;  // (price * qty).toFixed(2)
   })
 
   cartQty.innerHTML = `You have ${qty} items in your cart`;
