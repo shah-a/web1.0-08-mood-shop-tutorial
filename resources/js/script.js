@@ -77,33 +77,26 @@ all_items_button.forEach(elt => elt.addEventListener('click', () => {
 const cart = [];
 
 // ----------------------------------------
-// Add Item
-function addItem(name, price) {
-  for (let i = 0; i < cart.length; i++) {
-    if (cart[i].name === name) {
-      cart[i].qty++;
-      return;
-    }
+// Handle Clicks on Add and Remove Buttons
+itemList.onclick = function (e) {
+  const name = e.target.dataset.name;
+  if (e.target && e.target.classList.contains("remove-all")) {
+    removeItem(name);
+  } else if (e.target && e.target.classList.contains("add-one")) {
+    addItem(name);
+  } else if (e.target && e.target.classList.contains("remove-one")) {
+    removeItem(name, 1);
   }
-    const item = {name, price, qty: 1};
-    cart.push(item);
 }
 
 // ----------------------------------------
-// Show Items
-function showItems() {
-  const qty = getQty();
-  const total = getTotal();
-
-  let itemStr = "";
-  cart.forEach(function (item) {
-    const {name, price, qty} = item;
-    itemStr += `<li>${name} $${price} x ${qty} = ${price * qty}</li>`;  // (price * qty).toFixed(2)
-  })
-
-  cartQty.innerHTML = `You have ${qty} items in your cart`;
-  itemList.innerHTML = itemStr;
-  cartTotal.innerHTML = `Total in cart: $${total}`;
+// Handle Change Events on Update Input
+itemList.onchange = function (e) {
+  const name = e.target.dataset.name;
+  const qty = parseInt(e.target.value);
+  if (e.target && e.target.classList.contains("update")) {
+    updateCart(name, qty);
+  }
 }
 
 // ----------------------------------------
@@ -127,6 +120,44 @@ function getTotal() {
 }
 
 // ----------------------------------------
+// Show Items
+function showItems() {
+  const qty = getQty();
+  const total = getTotal();
+
+  let itemStr = "";
+  cart.forEach(function (item) {
+    const {name, price, qty} = item;
+    itemStr += `<li>
+    ${name} $${price} x ${qty} = ${(price * qty).toFixed(2)}
+    <button class="remove-all" data-name="${name}">Remove</button>
+    <button class="add-one" data-name="${name}">+</button>
+    <button class="remove-one" data-name="${name}">-</button>
+    <input class="update" type="number" data-name="${name}">
+    </li>`;
+  })
+
+  cartQty.innerHTML = `You have ${qty} items in your cart`;
+  itemList.innerHTML = itemStr;
+  cartTotal.innerHTML = `Total in cart: $${total}`;
+}
+
+// ----------------------------------------
+// Add Item
+function addItem(name, price) {
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].name === name) {
+      cart[i].qty++;
+      showItems();
+      return;
+    }
+  }
+    const item = {name, price, qty: 1};
+    cart.push(item);
+    showItems();
+}
+
+// ----------------------------------------
 // Remove Item 
 function removeItem(name, qty = 0) {
   for (let i = 0; i < cart.length; i++) {
@@ -137,23 +168,24 @@ function removeItem(name, qty = 0) {
       if (cart[i].qty < 1 || qty === 0) {
         cart.splice(i, 1)
       }
+      showItems();
       return;
     }
   }
 }
 
 // ----------------------------------------
-addItem("Apple", 0.99);
-addItem("Orange", 1.29);
-addItem("Opinion", 0.02);
-addItem("Apple", 0.99);
-addItem("Frisbee", 9.92);
-addItem("Apple", 0.99);
-addItem("Orange", 1.29);
-
-showItems();
-
-removeItem("Apple", 1);
-removeItem("Frisbee");
-
-showItems();
+// Update Cart
+function updateCart(name, qty) {
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].name === name) {
+      if (qty < 1) {
+        removeItem(name);
+        return
+      }
+      cart[i].qty = qty;
+      showItems();
+      return
+    }
+  }
+}
