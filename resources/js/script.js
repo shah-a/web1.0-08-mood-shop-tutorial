@@ -1,6 +1,9 @@
 import data from "./data.js"
 
 const itemsContainer = document.getElementById("items");
+const itemList = document.getElementById("item-list");
+const cartQty = document.getElementById("cart-qty");
+const cartTotal = document.getElementById("cart-total");
 
 //ES6 forEach method:
 data.forEach(function (mood) {
@@ -85,11 +88,15 @@ function showItems() {
   const qty = getQty();
   const total = getTotal();
 
-  console.log(`You have ${qty} items in your cart`);
+  let itemStr = "";
   cart.forEach(function (item) {
-    console.log(`- ${item.name} $${item.price} x ${item.qty}`);
+    const {name, price, qty} = item;
+    itemStr += `<li>${name} $${price} x ${qty} = ${price * qty}</li>`;
   })
-  console.log(`Total in cart: $${total}`)
+
+  cartQty.innerHTML = `You have ${qty} items in your cart`;
+  itemList.innerHTML = itemStr;
+  cartTotal.innerHTML = `Total in cart: $${total}`;
 }
 
 // ----------------------------------------
